@@ -15,10 +15,26 @@ datasource db {
 }
 
 model User {
-  id  Int @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   firstName String
-  lastName String
-  email String @unique
+  lastName  String
+  email     String   @unique
+  goals     Goal[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Goal {
+  id              Int     @id @default(autoincrement())
+  enabled         Boolean
+  name            String
+  frequency       Int
+  frequency_range Int
+  min_count       Int
+  min_unit        String
+  streak          Int
+  count           Int
+  color           String
+  userId          Int
+  User            User    @relation(fields: [userId], references: [id])
 }
