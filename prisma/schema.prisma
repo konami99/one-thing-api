@@ -25,16 +25,16 @@ model User {
 }
 
 model Goal {
-  id              Int     @id @default(autoincrement())
-  enabled         Boolean
-  name            String
-  frequency       Int
-  frequency_range Int
-  min_count       Int
-  min_unit        String
-  streak          Int
-  count           Int
-  color           String
-  userId          Int
-  User            User    @relation(fields: [userId], references: [id])
+  id             Int     @id @default(autoincrement())
+  enabled        Boolean
+  name           String
+  frequency      Int
+  frequencyRange Int
+  minCount       Int
+  minUnit        String
+  streak         Int
+  count          Int
+  color          String
+  userId         Int
+  User           User    @relation(fields: [userId], references: [id])
 }
