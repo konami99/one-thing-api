@@ -25,7 +25,7 @@ model User {
 }
 
 model Goal {
-  id             Int     @id @default(autoincrement())
+  id             Int        @id @default(autoincrement())
   enabled        Boolean
   name           String
   frequency      Int
@@ -36,5 +36,17 @@ model Goal {
   count          Int
   color          String
   userId         Int
-  User           User    @relation(fields: [userId], references: [id])
+  User           User       @relation(fields: [userId], references: [id])
+  completes      Complete[]
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+}
+
+model Complete {
+  id        Int      @id @default(autoincrement())
+  date      DateTime
+  goalId    Int
+  Goal      Goal     @relation(fields: [goalId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
