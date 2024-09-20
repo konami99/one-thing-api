@@ -8,24 +8,24 @@ export class GoalsService {
 
   async create(createGoalDto: Prisma.GoalCreateInput) {
     return this.databaseService.goal.create({
-      data: createGoalDto
-    })
+      data: createGoalDto,
+    });
   }
 
   async findAll(userId: number) {
     return this.databaseService.goal.findMany({
       where: {
-        userId
-      }
-    })
+        userId,
+      },
+    });
   }
 
   async findOne(id: number) {
     return this.databaseService.goal.findUnique({
       where: {
         id,
-      }
-    })
+      },
+    });
   }
 
   async update(id: number, updateGoalDto: Prisma.GoalUpdateInput) {
@@ -34,14 +34,14 @@ export class GoalsService {
         id,
       },
       data: updateGoalDto,
-    })
+    });
   }
 
   async remove(id: number) {
     return this.databaseService.goal.delete({
       where: {
         id,
-      }
-    })
+      },
+    });
   }
 }
