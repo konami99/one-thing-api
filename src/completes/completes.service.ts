@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+import { Complete, Prisma } from '@prisma/client';
 import { DatabaseService } from 'src/database/database.service';
 
 @Injectable()
@@ -12,12 +12,18 @@ export class CompletesService {
     });
   }
 
-  async findAll(goalId: number) {
-    return this.databaseService.complete.findMany({
-      where: {
-        goalId,
-      },
-    });
+  async findAll(goalId: number, year: number, month: number) {
+    if (isNaN(year) && isNaN(month)) {
+      return this.databaseService.complete.findMany({
+        where: {
+          goalId,
+        },
+      });
+    } else {
+      return this.databaseService.$queryRaw<Complete[]>(
+        Prisma.sql`SELECT * FROM "Complete" WHERE "goalId"=${goalId} AND date_part('YEAR', date)=${year} AND date_part('MONTH', date)=${month}`,
+      );
+    }
   }
 
   async findOne(id: number) {

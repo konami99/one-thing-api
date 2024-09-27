@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+} from '@nestjs/common';
 import { CompletesService } from './completes.service';
 import { Prisma } from '@prisma/client';
 
@@ -12,8 +21,12 @@ export class CompletesController {
   }
 
   @Get()
-  findAll(@Query('goalId') goalId: number) {
-    return this.completesService.findAll(goalId);
+  findAll(
+    @Query('goalId') goalId: string,
+    @Query('year') year: string,
+    @Query('month') month: string,
+  ) {
+    return this.completesService.findAll(+goalId, +year, +month);
   }
 
   @Get(':id')
@@ -22,7 +35,10 @@ export class CompletesController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCompleteDto: Prisma.CompleteUpdateInput) {
+  update(
+    @Param('id') id: string,
+    @Body() updateCompleteDto: Prisma.CompleteUpdateInput,
+  ) {
     return this.completesService.update(+id, updateCompleteDto);
   }
 

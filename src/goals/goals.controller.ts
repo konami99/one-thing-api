@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+} from '@nestjs/common';
 import { GoalsService } from './goals.service';
 import { Prisma } from '@prisma/client';
 
@@ -22,7 +31,10 @@ export class GoalsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateGoalDto: Prisma.GoalUpdateInput) {
+  update(
+    @Param('id') id: string,
+    @Body() updateGoalDto: Prisma.GoalUpdateInput,
+  ) {
     return this.goalsService.update(+id, updateGoalDto);
   }
 
