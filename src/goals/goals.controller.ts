@@ -21,8 +21,8 @@ export class GoalsController {
   }
 
   @Get()
-  findAll(@Query('userId') userId: number) {
-    return this.goalsService.findAll(userId);
+  findAll(@Query('userId') userId: string) {
+    return this.goalsService.findAll(+userId);
   }
 
   @Get(':id')
